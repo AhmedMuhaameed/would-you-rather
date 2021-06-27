@@ -9,17 +9,17 @@ class Header extends Component {
         const { currentUser, history } = this.props;
         return (
             <Navbar bg="light" expand="lg">
-                <Navbar.Brand as={Link} to="/">Would You Rather ?</Navbar.Brand>
+                <Navbar.Brand as={Link} to="/questions">Would You Rather ?</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">
-                        <Nav.Link as={Link} to="/">
+                        <Nav.Link as={Link} to="/questions">
                             Dashboard
                         </Nav.Link>
                         <Nav.Link as={Link} to="/add">
                             New Question
                         </Nav.Link>
-                        <Nav.Link as={Link} to="/board">
+                        <Nav.Link as={Link} to="/leaderboard">
                             Leader Board
                         </Nav.Link>
                     </Nav>

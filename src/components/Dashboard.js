@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import { Tabs, Tab } from "react-bootstrap";
 import { connect } from "react-redux";
 import sortBy from "sort-by";
-import QuestionAsk from "./QuestionAsk";
-import QuestionAnswer from "./QuestionAnswer";
+import Question from "./Question";
 
 class Dashboard extends Component {
     state = {
@@ -13,7 +12,7 @@ class Dashboard extends Component {
     handleChange = (e) => {
         this.setState({ key: e });
     };
-
+   
     formatQuestions = (questionsIds) =>
         questionsIds
             .map((questionId) => ({
@@ -50,10 +49,11 @@ class Dashboard extends Component {
             >
                 <Tab eventKey="UNANSWERED_QUESTIONS" title={`UNANSWERED QUESTIONS | ${unAnsweredQuestions.length}`}>
                     {unAnsweredQuestions &&
-                        this.formatQuestions(unAnsweredQuestions).map((question) => <QuestionAsk {...question} key={question.id} />)}
+                        this.formatQuestions(unAnsweredQuestions).map((question) => <Question {...question} key={question.id} />)}
                 </Tab>
                 <Tab eventKey="ANSWERED_QUESTIONS" title={`ANSWERED QUESTIONS | ${answeredQuestions.length}`}>
-                    {answeredQuestions ? <QuestionAnswer answeredQuestions={answered} /> :""}
+                {answeredQuestions &&
+                        this.formatQuestions(answeredQuestions).map((question) => <Question answeredQuestions={answered} {...question} key={question.id} />)}
                 </Tab>
             </Tabs>
         );

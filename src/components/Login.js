@@ -22,7 +22,7 @@ class Login extends Component {
         e.preventDefault();
         const users = Object.values(this.props.users);
         if (this.props.users && this.state.user !== "select-user" && this.state.user) {
-            this.props.history.push('/');
+            this.props.history.push('/questions');
             let user = this.state.user ? this.state.user : 1;
             this.props.dispatch(handleLogin(users.find((val) => val.id === user)));
         } else {

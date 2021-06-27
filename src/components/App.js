@@ -7,7 +7,8 @@ import Dashboard from "./Dashboard";
 import Layout from "./Layout";
 import NewQuestion from "./NewQuestion";
 import LeaderBoard from "./LeaderBoard";
-
+import Question from "./Question";
+import QuestionDetails from "./QuestionDetails"
 class App extends Component {
     componentDidMount() {
         this.props.dispatch(handleInitialData());
@@ -16,13 +17,13 @@ class App extends Component {
         const { history } = this.props;
         return Object.keys(this.props.currentUser).length ? (
             <Layout>
-                <Route path="/" exact component={Dashboard} />
+                <Route path="/questions" exact component={Dashboard} />
+                <Route path="/questions/:question_id" exact component={QuestionDetails} />
                 <Route path="/add" exact component={NewQuestion} />
-                <Route path="/board" exact component={LeaderBoard} />
+                <Route path="/leaderboard" exact component={LeaderBoard} />
             </Layout>
         ) : (
             <Login />
-            // <Route exact path="/login" name="Login Page" component={Login} />
         );
     }
 }
