@@ -23,9 +23,8 @@ class NewQuestion extends Component {
         const author = this.props.authedUser.id;
         const firstAnswer = this.state.optionOne;
         const seconedAnswer = this.state.optionTwo;
-
         if (this.state.optionOne.length !== 0 || this.state.optionTwo.length !== 0) {
-            this.props.history.push("/");
+            this.props.history.push("/questions");
             this.props.dispatch(handleAddQuestion({ firstAnswer, seconedAnswer, author }));
         } else {
             alert("Please Enter answers of the question");

@@ -44,14 +44,19 @@ class QuestionDetails extends Component {
         return Math.round((arr1.length / (arr1.length + arr2.length)) * 100);
     };
     render() {
-        const { questions ,authedUser,users } = this.props;
+        const { questions, authedUser, users } = this.props;
         let questionId = this.props.match.params.question_id;
-        
+
         const unAnsweredQuestions = Object.keys(questions).filter(
             (questionId) =>
-            !questions[questionId].optionOne.votes.includes(authedUser.id) &&
-            !questions[questionId].optionTwo.votes.includes(authedUser.id)
-            );
+                !questions[questionId].optionOne.votes.includes(authedUser.id) &&
+                !questions[questionId].optionTwo.votes.includes(authedUser.id)
+        );
+        const answeredQuestions = Object.keys(questions).filter(
+            (questionId) =>
+                questions[questionId].optionOne.votes.includes(authedUser.id) ||
+                questions[questionId].optionTwo.votes.includes(authedUser.id)
+        );
         return (
             <div>
                 {unAnsweredQuestions.includes(this.props.match.params.question_id) ? (
@@ -97,16 +102,28 @@ class QuestionDetails extends Component {
                                     </span>{" "}
                                     asks Would you rather :
                                 </Card.Title>
-                                <label>{questions[questionId].optionOne.text}</label>
+                                <p>
+                                    {questions[questionId].optionOne.text} <b>Votes: {questions[questionId].optionOne.votes.length}</b>
+                                    <em>{questions[questionId].optionOne.votes.includes(authedUser.id)? "  (Selected)" :""}</em>
+                                </p>
                                 <ProgressBar
                                     now={this.calcPercentage(questions[questionId].optionOne.votes, questions[questionId].optionTwo.votes)}
-                                    label={`${this.calcPercentage(questions[questionId].optionOne.votes, questions[questionId].optionTwo.votes)}%`}
+                                    label={`${this.calcPercentage(
+                                        questions[questionId].optionOne.votes,
+                                        questions[questionId].optionTwo.votes
+                                    )}%`}
                                 />
 
-                                <label>{questions[questionId].optionTwo.text}</label>
+                                <p>
+                                    {questions[questionId].optionTwo.text} <b>Votes: {questions[questionId].optionTwo.votes.length}</b>
+                                    <em>{questions[questionId].optionTwo.votes.includes(authedUser.id)? "  (Selected)" :""}</em>
+                                </p>
                                 <ProgressBar
                                     now={this.calcPercentage(questions[questionId].optionTwo.votes, questions[questionId].optionOne.votes)}
-                                    label={`${this.calcPercentage(questions[questionId].optionTwo.votes, questions[questionId].optionOne.votes)}%`}
+                                    label={`${this.calcPercentage(
+                                        questions[questionId].optionTwo.votes,
+                                        questions[questionId].optionOne.votes
+                                    )}%`}
                                 />
                             </Card.Body>
                         </Card>
