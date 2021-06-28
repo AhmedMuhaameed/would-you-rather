@@ -57,6 +57,14 @@ class QuestionDetails extends Component {
                 questions[questionId].optionOne.votes.includes(authedUser.id) ||
                 questions[questionId].optionTwo.votes.includes(authedUser.id)
         );
+        if (typeof questions[questionId] === "undefined") {
+            return (
+                <div>
+                    <p className="error"><b>Error 404</b> The page You have requested is not Found</p>
+                
+                </div>
+            );
+        }
         return (
             <div>
                 {unAnsweredQuestions.includes(this.props.match.params.question_id) ? (
@@ -104,7 +112,7 @@ class QuestionDetails extends Component {
                                 </Card.Title>
                                 <p>
                                     {questions[questionId].optionOne.text} <b>Votes: {questions[questionId].optionOne.votes.length}</b>
-                                    <em>{questions[questionId].optionOne.votes.includes(authedUser.id)? "  (Selected)" :""}</em>
+                                    <em>{questions[questionId].optionOne.votes.includes(authedUser.id) ? "  (Selected)" : ""}</em>
                                 </p>
                                 <ProgressBar
                                     now={this.calcPercentage(questions[questionId].optionOne.votes, questions[questionId].optionTwo.votes)}
@@ -116,7 +124,7 @@ class QuestionDetails extends Component {
 
                                 <p>
                                     {questions[questionId].optionTwo.text} <b>Votes: {questions[questionId].optionTwo.votes.length}</b>
-                                    <em>{questions[questionId].optionTwo.votes.includes(authedUser.id)? "  (Selected)" :""}</em>
+                                    <em>{questions[questionId].optionTwo.votes.includes(authedUser.id) ? "  (Selected)" : ""}</em>
                                 </p>
                                 <ProgressBar
                                     now={this.calcPercentage(questions[questionId].optionTwo.votes, questions[questionId].optionOne.votes)}
