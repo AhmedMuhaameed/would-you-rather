@@ -1,5 +1,6 @@
 **Would You Rather ? Project**
 
+<p>You can visit the project via this link: https://would-you-rather-ahmed-mohamed.netlify.app/</p>
 
 **How to run project**
 
